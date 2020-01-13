@@ -1,0 +1,76 @@
+server:
+  port: 8014
+  servlet:
+    context-path: /FireControl
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: FireControl
+  datasource:
+    url: jdbc:mysql://61.178.17.40:3306/moxi?useUnicode=true&characterEncoding=UTF-8&serverTimeZone=GMT%2B8&useSSL=false
+    username: tam
+    password: tam@root
+    driver-class-name: com.mysql.jdbc.Driver
+
+  # 打印sql
+  logging:
+    level:
+      com.bolijiang3d.program.mapper: debug
+#    config: classpath:log4j2.yml #指定log4j2的配置文件
+      config: classpath:log/logback.xml #指定log4j2的配置文件
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bolijiang3d.program.entity
+
+
+#pagehelper分页插件
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  row-bounds-with-count: true
+  params: count=countSql
+  helper-dialect: mysql
+
+swagger2:
+  enable: true
+
+logging:
+  level:
+    com.bolijiang3d.program.mapper: debug
+
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    logic-delete-value: 0 # 逻辑已删除值(默认为 1)
+    logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
+#    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector #逻辑删除配置
+
+#JDP认证配置
+jdp:
+#  security:
+#    client:
+#      client_id: 6fe9ee4728514e5a85d3b7715a65955d
+#      client_secret: da654c18f7754890af730e517807dd1b
+#      grant_type: implicit
+#      scope: read
+#      redirectUrl: http://10.18.28.202:8888/common/receivingToken
+#      shiroFilterUrls: /dagl/anon:anon,/swagger-ui.html:anon,/webjars/**:anon,/swagger-resources/**:anon,/null/swagger-resources/**:anon,/v2/**:anon,/sysArea/getChildByParentCode:anon,/progress/getIndexAdvancedList:anon,/progress/getIndexEventList:anon,/progress/getIndexPrizeList:anon,/progress/getProgressByCode:anon,/classStatistics/selectByAreaCode:anon
+#      shiroUnauthorizedUrl: /my/403
+#    authc:
+#      rsServerUrl: http://10.18.28.202:8888
+  encrypt:
+    encrypt-algorithm: aes
+    secret-key-provider: fixed_secretkey_provider
+    decrypto-filter-order: 100000
+    decrypto-filter-url-pattern: /*
+    fixed-secret-key:
+      decrypt-secret-key: aesiptvgswwcode1
+      encrypt-secret-key: aesiptvgswwcode1
+    header-name: x-secret-key
+
